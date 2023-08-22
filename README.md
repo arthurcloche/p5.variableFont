@@ -1,13 +1,7 @@
 # p5.variableFont
 WIP to bring variable fonts to p5.js
+🎉 It's working
 
-## Context
-### Webcanvas
-There a some specific steps needed to be taken for the webcanvas.
-I will put the list here
-### p5.js   
-There a some specific steps needed to be taken for p5.js.
-I will put the list here
 # Usecases
 ## For Google Fonts and font loaded from API's
 
@@ -16,7 +10,7 @@ As explained here : https://www.launch2success.com/guide/getting-google-font-var
 
 ### Weight axis
 
-If you only wish to animate the weight of your google font. You can use the 'textGoogleFont()'
+If you only wish to animate the weight of your google font. You can use the 'textFont()'
 
 ## For Loaded Font 
 
@@ -44,6 +38,11 @@ canvas.font = 'weight style font size'
 ### We can use CSS to dynamically change the style of a character by directly setting the style to the canvas element, including the p5 canvas ( which still a canvas element)
 this.canvas.style.fontVariationSettings = '...axis,...values'
 
+### How p5.js handle fonts
+#### Native canvas
+
+#### opentype.js
+
 ## Limitations
 Major issue i haven't figured out yet 
 ### no variable setting in opentype.js
@@ -51,3 +50,6 @@ There seems to be no way to request a specific character with specific variable 
 This gets in the way of expading this solution to text operations like font.textToPoints() and displaying a font in WEBGL because both require the font to be parsed by opentype.js. It will load the font at the minimal axis values and prevent any animation.
 
 If you really need it to be drawn using points, one solution i saw being applied is to upload both opentype fonts to their minimal-maximal axis values, you might need Glyphs or a similar app to achieve that from a single font file but otherwise many font providers allow you to get individual styles. Once you got the points for the minimal value and the maximal values using either textToPoints or a custom approach using opentype.js, you can interpolate to any font weight by puting a point at a certain percentage between the min/max since the variable characters need to have the same amount of points for them to work correctly.
+
+### acessing an API requested font axis and measurement
+Getting access to the file that is requested from 'font.gstatic.com' by the 'fonts.googleapis.com' could help to harmonize the process and make it more coherent with the pipeline already being used by p5.js
