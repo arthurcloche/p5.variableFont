@@ -1,0 +1,14 @@
+html, body {
+    margin: 0;
+    padding: 0;
+  }
+  canvas {
+    display: block;
+  }
+  
+  @font-face {
+    font-family: "Obviously";
+    src:
+      local("Obviously"),
+      url("./src/Obviously-Variable.ttf") format("truetype");
+  }
