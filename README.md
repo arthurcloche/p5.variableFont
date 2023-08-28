@@ -53,8 +53,6 @@ Subsequent to the previous issue, p5.js use opentype.js to extract the datas fro
 See : https://jcgt.org/published/0006/02/02/paper.pdf
 And : https://github.com/processing/p5.js/blob/main/src/webgl/text.js
 
----
-
 #### Workaround
 
 The usual solution to that is to render the text on an image using p5.js `createGraphics()` or a webgl texture : https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html and using as either a `texture()` or a `texture2D()` in a shader. A good idea is to leverage the 2D canvas font metrics evaluation to get the optimal size for a texture to contain some text at a given size using `drawingContext.measureText(text)`. More on this : https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText
