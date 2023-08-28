@@ -64,8 +64,7 @@ The usual solution to that is to render the text on an image using p5.js `create
 Getting access to the file that is requested i.e. from 'font.gstatic.com' by the 'fonts.googleapis.com' to pass it through `opentype.js` could help to harmonize the process and make it more coherent with the pipeline already being used by p5.js
 
 #### Workaround
-
-## Still looking 👀
+Still looking 👀
 
 ## Methods
 
