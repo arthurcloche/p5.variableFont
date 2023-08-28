@@ -34,7 +34,7 @@ It might happen that when trying to animate one axis in a p5.Graphics without ch
 
 #### Workaround
 
-## For now, just make sure you animate the `wght` axis if one is present. You can make a super subtle variation i.e. slowly going back and forth between 400 and 401, i dont really knwo why but the value need to be updated over time for all the others to animate.
+For now, just make sure you animate the `wght` axis if one is present. You can make a super subtle variation i.e. slowly going back and forth between 400 and 401, i dont really knwo why but the value need to be updated over time for all the others to animate.
 
 #### 🚫 Limitation: No variable setting in opentype.js
 
@@ -45,7 +45,7 @@ This gets in the way of expading this solution to text operations like `font.tex
 
 If your text really need to be drawn using points, one solution i saw being applied is to upload both opentype fonts to their minimal-maximal axis values, you might need Glyphs or a similar app to achieve that from a single font file but otherwise many font providers allow you to get individual styles. Once you got the points for the minimal value and the maximal values using either textToPoints or a custom approach using opentype.js, you can interpolate to any font weight by puting a point at a certain percentage between the min/max since the variable characters need to have the same amount of points for them to work correctly.
 
-## You can extract a 'single weight' using Dinamo font gauntlet : https://fontgauntlet.com/
+You can extract a 'single weight' using Dinamo font gauntlet : https://fontgauntlet.com/
 
 #### 🚫 Limitation: No support for WebGL context (yet)
 
@@ -57,7 +57,7 @@ And : https://github.com/processing/p5.js/blob/main/src/webgl/text.js
 
 #### Workaround
 
-## The usual solution to that is to render the text on an image using p5.js `createGraphics()` or a webgl texture : https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html and using as either a `texture()` or a `texture2D()` in a shader. A good idea is to leverage the 2D canvas font metrics evaluation to get the optimal size for a texture to contain some text at a given size using `drawingContext.measureText(text)`. More on this : https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText
+The usual solution to that is to render the text on an image using p5.js `createGraphics()` or a webgl texture : https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html and using as either a `texture()` or a `texture2D()` in a shader. A good idea is to leverage the 2D canvas font metrics evaluation to get the optimal size for a texture to contain some text at a given size using `drawingContext.measureText(text)`. More on this : https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText
 
 #### 🔎 Nice to have : accessing and caching an API requested font file, axis and measurement
 
@@ -242,29 +242,26 @@ Make sure to put the axis in the alphabetical order.
 
 If you uploaded a Google Font using the preloading method, you won't need to use the following functions. Those works in real-time so you can use these to dynamically add a Google Font to your code.
 
+Load a Google Font to be used with `textFont('name')`.
 ```js
  function loadGoogleFont(name:string)
 ```
 
-Load a Google Font to be used with `textFont('name')`.
-
+Load a Google Font at a given weight.
 ```js
  function loadGoogleFont(name:string, variation:number)
 ```
 
-Load a Google Font at a given weight.
-
+Load a Google Font and its weights between the min-max
 ```js
  function loadGoogleFont(name:string, variation:[min:number,max:number]])
 ```
 
-Load a Google Font and its weights between the min-max
-
+Load a Google Font and its variations ranging within their respective min-max
 ```js
  function loadGoogleFont(name:string, variation:{key: value:number, ...})
 ```
 
-## Load a Google Font and its variations ranging within their respective min-max
 
 # Under the hood
 
@@ -272,25 +269,11 @@ I want to try to explain a little bit how things are happening from what i under
 
 ## Variable fonts in WebCanvas
 
-I promise to elaborate more on this section because it holds a ton of potential. I'm still figuring things out.
-I've tried MANY time to bring variable fonts to webCanvas, all attempt where disapointing so i thought it was just not compatible. But recently i had the need to research a little bit how google fonts are uploaded to be used in the browser and following the bread crumbs, i found the gingerbread house at the end and i THINK i figured it out.
-
-Here's the three main thing i recently realized that helped me putting it all that together, which are kinda obvious when you think about it.
-
 ### Every font on the web is either displayed using CSS or rasterized bezier curves
-
-After reading and dwelling into the documentation, i realized that there are two main option to draw fonts on a webCanvas.
-The first is by using opentype.js to load the font data and draw each characters using bezier curves as shapes. This is the way p5.js try to work when you upload a font using 'loadFont(url)'
-
-The second is by using the native WebCanvas API using 'textFill()'
 
 ### Web Canvas use a CSS-like approach to 'style' the text before displaying it
 
-canvas.font = 'weight style font size'
-
 ### We can use CSS to dynamically change the style of a character by directly setting the style to the canvas element, including the p5 canvas ( which still a canvas element)
-
-this.canvas.style.fontVariationSettings = '...axis,...values'
 
 ### How p5.js handle fonts
 
