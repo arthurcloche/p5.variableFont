@@ -1,65 +1,56 @@
 # p5.variableFont
-![example](https://github.com/amehowc/p5.variableFont/assets/38710749/5790ecdc-2786-46db-bc0e-3d89805fec81)
-Font credits : Oh No - Obviously
+![example](https://github.com/amehowc/p5.variableFont/assets/38710749/5790ecdc-2786-46db-bc0e-3d89805fec81)  
+Font credits: Oh No - Obviously
 
 ## Bringing variable fonts to p5.js 🎉
 
-I changed a couple p5.js function to support variable fonts and Google fonts ( and by extension, Google variable fonts !).
-Everything works but there a some 'ducktape-y' fixs in the code to maintain the original p5 workflow, i'll figure out how to integrate it better if there is enough interest around this but for now, make sure to read the documentation :)
+I've modified several p5.js functions to support variable fonts and Google fonts (and by extension, Google variable fonts!). Everything works, but there are some 'duct tape' fixes in the code to maintain the original p5 workflow. I'll integrate these better if there's enough interest. For now, please read the documentation :)
 
-Built around p5.js `v1.7.0` but should work with previous version. It can be used in either the main `canvas` or a `p5.Graphics`. If you encounter some issues animating some axis within a `p5.Graphics`, there is a known bug, see below. You can still use `fill()`,`stroke()`,`textWidth()`,`textLeading()` and so on. It even works with the native `drawingContext` functions like `ctx.wordSpacing`.
+This is built around p5.js `v1.7.0` but should work with previous versions. It can be used on either the main `canvas` or a `p5.Graphics`. There's a known bug related to animating some axes within a `p5.Graphics`. All the standard methods like `fill()`, `stroke()`, `textWidth()`, `textLeading()`, and so on are supported. It even works with native `drawingContext` functions like `ctx.wordSpacing`.
 
-This build rely on p5.js but you can certainly adapt it for a vanilla webCanvas !
+Although this build depends on p5.js, you can adapt it for a vanilla webCanvas!
 
-Keep me posted if you create anything cool with it or if there are any issues !
-Have fun !
+I'd love to see anything cool you create with it. Let me know if you encounter any issues. Have fun!
 
 ## Important !
 
-There a two(-ish) ways to load and use a font in p5.js, one is by loading a font with `loadFont()` and the other is to define a font in either CSS using a `@font-face` tag or by importing it through an API, i.e. the Google Fonts API. ( A third would be to use SVG, i found some clues but didn't really explored it yet. ). They both boil down the same thing when using `text()` in the 2D context but there are some difference when it comes to using the font data like `font.textToPoints()` or `font.getBounds()`or using the WEBGL context.
+There are two primary methods for loading and using fonts in p5.js. One involves using `loadFont()`, and the other is by defining a font either through CSS with a `@font-face` tag or importing it via an API like the Google Fonts API. Both methods have the same end result when using `text()` in the 2D context. However, differences emerge when you delve into font data functions like `font.textToPoints()` or `font.getBounds()`, or when using the WEBGL context.
 
-In order to use variable fonts in p5.js, you will have to use the CSS way. This is not really different, instead of `textFont(loadedFont)`, you will need to call a string like `textFont('YourFontName')`with either the name of the `font-family` (https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face), the name of the Google Font (reminder : white-space is important so make sure to use i.e `Playfair Display`) or i added a new argument to the p5 `loadFont()` to define a CSS name as a fourth arguments to make it available for user loaded font (if you wonder why you need to use CSS in the canvas, more on this below).
+For variable fonts in p5.js, you'll need to use the CSS method. Instead of `textFont(loadedFont)`, you'd call `textFont('YourFontName')` where the name is either the `font-family` from the [CSS specification](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face), the name of the Google Font (e.g., `Playfair Display`), or I've added a new argument to p5's `loadFont()` to define a CSS name as a fourth argument for user-loaded fonts.
 
-## Also important !
+## Also Important!
 
-p5.js cannot render a font with a given variation if that variation doesn't exist, is out of range, the name isn't matching or, in the case of an API requested font, that those variations are not loaded (see below for that). So make sure to load a variable font, that the axis names are matching and that the values are within the range. Most of the time, those names and min-max values are provided on the retailers websites but you can use the Dinamo Font Gauntlet (https://fontgauntlet.com/) or use the provided `font.getVariations()` in the case of a loaded p5.Font.
+p5.js cannot render a font variation that's unavailable, out of range, misnamed, or in the case of an API-requested font, unloaded. Ensure you load the correct variable font, with matching axis names, and values within the proper range. Most of the time, retailers provide these names and min-max values. However, you can also use tools like the [Dinamo Font Gauntlet](https://fontgauntlet.com/) or the built-in `font.getVariations()` for loaded p5.Fonts.
 
-## Kinda important too !
+## Kinda Important too!
 
-### Limitations & bugs
+### Limitations & Bugs
 
-#### 🐛 Bug : Animating a single axis on a multi-axis font in a p5.Graphics()
-
-It might happen that when trying to animate one axis in a p5.Graphics without changing the `wght` or `textWeight()`, the font will not be animated at all. I'm looking into it 👀
-
-#### Workaround
-
-For now, just make sure you animate the `wght` axis if one is present. You can make a super subtle variation i.e. slowly going back and forth between 400 and 401, i dont really knwo why but the value need to be updated over time for all the others to animate.
-
-#### 🚫 Limitation: No variable setting in opentype.js
-
-There seems to be no way to request a specific character with specific variable axis values from opnetype.js
-This gets in the way of expading this solution to text operations like `font.textToPoints()` and displaying a font in WEBGL because both require the font to be parsed by opentype.js. It will load the font at the minimal axis values and prevent any animation.
+#### 🐛 Bug: Animating a Single Axis on a Multi-Axis Font in `p5.Graphics`
+Trying to animate a single axis in a `p5.Graphics` without adjusting the `wght` or `textWeight()` might result in no animation. I'm working on this issue.
 
 #### Workaround
+Ensure you animate the `wght` axis if it exists. You can create a minimal variation, for instance, oscillating between 400 and 401.
 
-If your text really need to be drawn using points, one solution i saw being applied is to upload both opentype fonts to their minimal-maximal axis values, you might need Glyphs or a similar app to achieve that from a single font file but otherwise many font providers allow you to get individual styles. Once you got the points for the minimal value and the maximal values using either textToPoints or a custom approach using opentype.js, you can interpolate to any font weight by puting a point at a certain percentage between the min/max since the variable characters need to have the same amount of points for them to work correctly.
-
-You can extract a 'single weight' using Dinamo font gauntlet : https://fontgauntlet.com/
-
-#### 🚫 Limitation: No support for WebGL context (yet)
-
-Subsequent to the previous issue, p5.js use opentype.js to extract the datas from a font file in order to render fonts in the 3D space.
-See : https://jcgt.org/published/0006/02/02/paper.pdf
-And : https://github.com/processing/p5.js/blob/main/src/webgl/text.js
+#### 🚫 Limitation: No Variable Setting in `opentype.js`
+There's currently no way to request a specific character with unique variable axis values from `opentype.js`. This limitation impacts functions like `font.textToPoints()` and displaying a font in WEBGL since both require `opentype.js` for parsing. As a result, the font loads with minimal axis values, preventing any animation.
 
 #### Workaround
+If you need your text drawn using points, one solution involves uploading both opentype fonts with their minimal-maximal axis values. You might need apps like Glyphs or similar for this. Once you've obtained the points for minimal and maximal values, you can interpolate any font weight by positioning a point between the min/max values.
 
-The usual solution to that is to render the text on an image using p5.js `createGraphics()` or a webgl texture : https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html and using as either a `texture()` or a `texture2D()` in a shader. A good idea is to leverage the 2D canvas font metrics evaluation to get the optimal size for a texture to contain some text at a given size using `drawingContext.measureText(text)`. More on this : https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText
+You can also extract a 'single weight' using the [Dinamo font gauntlet](https://fontgauntlet.com/).
 
-#### 🔎 Nice to have : accessing and caching an API requested font file, axis and measurement
+#### 🚫 Limitation: No Support for WebGL Context (Yet)
+p5.js uses `opentype.js` to parse font files for rendering in 3D space. Refer to the [following paper](https://jcgt.org/published/0006/02/02/paper.pdf) and the [p5.js source code](https://github.com/processing/p5.js/blob/main/src/webgl/text.js) for details.
 
-Getting access to the file that is requested i.e. from 'font.gstatic.com' by the 'fonts.googleapis.com' to pass it through `opentype.js` could help to harmonize the process and make it more coherent with the pipeline already being used by p5.js
+#### Workaround
+A common solution is to render text on an image using p5.js's `createGraphics()` or a WebGL texture (more details [here](https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html)). One tip is to use the 2D canvas font metrics to obtain the optimal texture size for containing text. More information on this technique can be found [here](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_text).
+
+---
+
+#### 🔎 Nice to have: accessing and caching an API requested font file, axis and measurement
+
+Getting access to the file that is requested i.e. from 'font.gstatic.com' by the 'fonts.googleapis.com' to pass it through `opentype.js` could help to harmonize the process and make it more coherent with the pipeline already being used by p5.js.
 
 #### Workaround
 Still looking 👀
