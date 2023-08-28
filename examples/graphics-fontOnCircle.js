@@ -22,7 +22,7 @@ function draw() {
     push();
     const f = 6 * 60;
     const c = "a";
-    const t = c + c + c + c + c + c + c + c + c + c + c + c + c;
+    const t = new Array(13).fill(c).reduce((acc, curr) => acc + curr, '')
     const p = (frameCount % f) / f;
 
     const txtSize = 200;
