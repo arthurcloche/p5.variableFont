@@ -176,7 +176,7 @@ let styles = font.getStyles();
 textFont("your-font", size, styles[BOLD]);
 ```
 
-Those two function can used either in the `loadFont()` :
+Those two function can be used either in the `loadFont()` :
 
 ```js
 let font;
@@ -216,12 +216,12 @@ function setup() {
 ### loadGoogleFont()
 
 Small helper function to load a Google Font. It will build a `<link>` element and inject it in the `<head>`.
-Make sure to check the exact values and font names on: https://fonts.google.com/
+Make sure to check the exact values and font names on: https://fonts.google.com/.
 This function take a `name` as an input and will build an URL according to the Google Fonts API URLs structure.
 
 #### Important : Preloading a Google Font
 
-If you need or want to preload a Google Font (which i strongly suggest to prevent any glitch or latency) with all its variable axis, you will need to adjust your URL.
+If you need or want to preload a Google Font (which i strongly suggest) with all its variable axis, you will need to adjust your URL.
 Here's a guide on how to do it : https://www.launch2success.com/guide/getting-google-font-variable-files/
 
 In short, you will need to tell Google Font to load all the variations within a certain range. Again, make sure to check the min/max values and names. Unless you're on a super tight ressources management or you know exactly which weights/variations you need, get the widest range of values available. As mentioned before, if you try to display a variation at a value not loaded as Google Font, it will display a default font.
@@ -236,8 +236,6 @@ It should look like something like this :
     rel="stylesheet"
 />
 ```
-
-Make sure to put the axis in the alphabetical order.
 
 If you uploaded a Google Font using the preloading method, you won't need to use the following functions. Those works in real-time so you can use these to dynamically add a Google Font to your code.
 
@@ -259,26 +257,36 @@ Load a Google Font and its weights between the min-max
  function loadGoogleFont(name:string, variation:[min:number,max:number]])
 ```
 
-Load a Google Font and its variations ranging within their respective min-max
+Load a Google Font with a given variation axis at a given value
 
 ```js
  function loadGoogleFont(name:string, variation:{key: value:number, ...})
 ```
 
+Load a Google Font and its variations ranging within a min-max
+
+```js
+ function loadGoogleFont(name:string, variation:{key: value:[min:number,max:number], ...})
+```
+
 # Under the hood
 
-I want to try to explain a little bit how things are happening from what i understood so maybe some others interested people might jump in and participate in the effort to get a more diverse type support on p5.js and webcanvas.
+I will try to explain a little bit how things are happening from what i understood so maybe some others interested people might jump in and participate in the effort to get a more diverse type support on p5.js and webcanvas.
 
 ## Variable fonts in WebCanvas
-
-### Every font on the web is either displayed using CSS or rasterized bezier curves
-
-### Web Canvas use a CSS-like approach to 'style' the text before displaying it
-
-### We can use CSS to dynamically change the style of a character by directly setting the style to the canvas element, including the p5 canvas ( which still a canvas element)
 
 ### How p5.js handle fonts
 
 #### Native canvas
 
 #### opentype.js
+
+### Every font on the web is either displayed using CSS or rasterized bezier curves
+
+## Webcanvas use a CSS-like approach to 'style' the text before displaying it
+
+### We can use CSS to dynamically change the style of a character by directly setting the style to the canvas element
+
+### Exploring the relationship between CSS and WebCanvas
+
+
