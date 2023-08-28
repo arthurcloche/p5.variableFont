@@ -139,11 +139,10 @@ p5.prototype.textFont = function (theFont, theSize, theVariations) {
                 font = this._textFont.font.familyName;
                 this._setProperty("_textStyle", this._textFont.font.styleName);
             }
+            this.canvas.style.fontVariationSettings = this._fontVariations;
             this.drawingContext.font = `${this._textWeight || "normal"} ${
                 this._textStyle || "normal"
             } ${this._textSize || 12}px ${font || "sans-serif"}`;
-
-            this.canvas.style.fontVariationSettings = this._fontVariations;
 
             this.drawingContext.textAlign = this._textAlign;
             if (this._textBaseline === CENTER) {
@@ -163,10 +162,12 @@ p5.prototype.textFont = function (theFont, theSize, theVariations) {
                     const name = variation;
                     const value = theVariations[name];
                     fontVariationsSettings += `'${variation}'${value},`;
+                    if (name === "wght") {
+                        this._renderer._setProperty("_textWeight", value);
+                    }
                 }
                 let formatedfontVariationsSettings =
                     fontVariationsSettings.slice(0, -1);
-                this.canvas.style.fontVariationSettings = this._fontVariations;
                 this._renderer._setProperty(
                     "_fontVariations",
                     formatedfontVariationsSettings

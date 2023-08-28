@@ -1,14 +1,12 @@
 html, body {
     margin: 0;
     padding: 0;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
   }
   canvas {
     display: block;
   }
   
-  @font-face {
-    font-family: "Obviously";
-    src:
-      local("Obviously"),
-      url("./src/Obviously-Variable.ttf") format("truetype");
-  }

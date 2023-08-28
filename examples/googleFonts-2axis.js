@@ -1,4 +1,18 @@
 function preload() {
+
+    // both will do the same thing
+
+    // loadFont(
+    //     "../src/BricolageGrotesque-VariableFont.ttf",
+    //     (font) => {
+    //        const axis = font.getVariations(true);
+    //        const styles = font.getStyles(true);
+    //     },
+    //     () => {},
+    //     "Bricolage Grotesque"
+    // );
+
+
     loadGoogleFont("Bricolage Grotesque", {
         wght: [200, 800],
         wdth: [75, 100],
