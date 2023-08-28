@@ -8,6 +8,8 @@ function preload() {
 function setup() {
     createCanvas(800, 800);
     textAlign(CENTER, CENTER);
+
+    // done using a p5.Graphics for the example
     pg = createGraphics(width, height);
     pg.background("blue");
     pg.textAlign(CENTER, CENTER);
