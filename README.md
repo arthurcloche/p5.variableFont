@@ -125,7 +125,7 @@ This function needs opentype.js to be loaded externally, p5 relies on it to get 
 `<script src='https://unpkg.com/opentype.js@1.3.4/dist/opentype.js'></script>`
 
 The function is basically the same but take a fourth argument to define the font name in CSS so you can use it `textFont('CSSname')`
-I didn't figured out a way to add this without changing the p5.js default behaviors, it's a bit verbose due to the callbacks, but can you use it like this :
+I didn't figured out a way to add this without changing the p5.js default behavior. It's a bit verbose due to the callbacks, you can use it like this :
 
 ```js
 function preload() {
@@ -150,7 +150,7 @@ return { key: axis, values: { default: number, min: number, max: number } };
 
 
 ### font.getStyles()
-Return the style and the corresponding values on the variables axis.
+Return the style and their corresponding values on the variables axis.
 Setting the 'log' to `true` will display the result in the console.
 
 ```js
