@@ -121,8 +121,7 @@ Same idea as above but for the text variations (make sure that the weights exist
 ```js
  function textStretch(stretch:number)
 ```
-
-## Currently looking into that 👀
+Currently looking into that 👀
 
 ### loadFont()
 
