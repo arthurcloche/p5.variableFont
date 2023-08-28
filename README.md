@@ -7,7 +7,7 @@ Font credits : Oh No - Obviously
 I changed a couple p5.js function to support variable fonts and Google fonts ( and by extension, Google variable fonts !).
 Everything works but there a some 'ducktape-y' fixs in the code to maintain the original p5 workflow, i'll figure out how to integrate it better if there is enough interest around this but for now, make sure to read the documentation :)
 
-Built around p5.js `v1.7.0` but should work with previous version. It's running in both the main `canvas` and a `p5.Graphics`. If you encounter some issues animating some axis within a `p5.Graphics`, there is a known bug, see below. You can still use `fill()`,`stroke()`,`textWidth()`,`textLeading()` and so on. It even works with the native `drawingContext` functions like `ctx.wordSpacing`.
+Built around p5.js `v1.7.0` but should work with previous version. It can be used in either the main `canvas` or a `p5.Graphics`. If you encounter some issues animating some axis within a `p5.Graphics`, there is a known bug, see below. You can still use `fill()`,`stroke()`,`textWidth()`,`textLeading()` and so on. It even works with the native `drawingContext` functions like `ctx.wordSpacing`.
 
 This build rely on p5.js but you can certainly adapt it for a vanilla webCanvas !
 
@@ -68,7 +68,7 @@ Still looking 👀
 
 ### textFont()
 
-In case you didn't knew, you can define the size using a second parameter
+You can define the size using a second parameter
 
 ```js
  function textFont(font:string, textsize:number)
