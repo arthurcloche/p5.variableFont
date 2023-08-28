@@ -123,6 +123,7 @@ Same idea as above but for the text variations (make sure that the weights exist
 ```
 Currently looking into that 👀
 
+---
 ### loadFont()
 
 ```js
