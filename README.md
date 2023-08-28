@@ -46,14 +46,14 @@ p5.js uses `opentype.js` to parse font files for rendering in 3D space. Refer to
 #### Workaround
 A common solution is to render text on an image using p5.js's `createGraphics()` or a WebGL texture (more details [here](https://webglfundamentals.org/webgl/lessons/webgl-text-texture.html)). One tip is to use the 2D canvas font metrics to obtain the optimal texture size for containing text. More information on this technique can be found [here](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_text).
 
----
-
 #### 🔎 Nice to have: accessing and caching an API requested font file, axis and measurement
 
 Getting access to the file that is requested i.e. from 'font.gstatic.com' by the 'fonts.googleapis.com' to pass it through `opentype.js` could help to harmonize the process and make it more coherent with the pipeline already being used by p5.js.
 
 #### Workaround
 Still looking 👀
+
+---
 
 ## Methods
 
