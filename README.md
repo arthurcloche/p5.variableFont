@@ -1,6 +1,6 @@
 # p5.variableFont
 ![example](https://github.com/amehowc/p5.variableFont/assets/38710749/5790ecdc-2786-46db-bc0e-3d89805fec81)
-
+Font credits : Oh No - Obviously
 
 ## Bringing variable fonts to p5.js 🎉
 
