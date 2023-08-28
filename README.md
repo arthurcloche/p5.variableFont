@@ -151,24 +151,26 @@ function preload() {
 ```
 
 ### font.getVariations()
+Return the variables axis with their respective min/max and default value.
+Setting the 'log' to `true` will display the result in the console, usefull if needed only for reference.
 
 ```js
 let axis = font.getVariations(((log: boolean) = false));
 return { key: axis, values: { default: number, min: number, max: number } };
 ```
 
-Return the variables axis with their respective min/max and default value.
-Setting the 'log' to `true` will display the result in the console, usefull if needed only for reference.
+
 
 ### font.getStyles()
+Return the style and the corresponding values on the variables axis.
+Setting the 'log' to `true` will display the result in the console.
 
 ```js
 let styles = font.getStyles(log:boolean=false)
 return {key:style,values:{ { key: axis, value:number},...}
 ```
 
-Return the style and the corresponding values on the variables axis.
-Setting the 'log' to `true` will display the result in the console.
+
 
 The output is fitted to be used in the `textFont()`
 
@@ -243,25 +245,28 @@ Make sure to put the axis in the alphabetical order.
 If you uploaded a Google Font using the preloading method, you won't need to use the following functions. Those works in real-time so you can use these to dynamically add a Google Font to your code.
 
 Load a Google Font to be used with `textFont('name')`.
+
 ```js
  function loadGoogleFont(name:string)
 ```
 
 Load a Google Font at a given weight.
+
 ```js
  function loadGoogleFont(name:string, variation:number)
 ```
 
 Load a Google Font and its weights between the min-max
+
 ```js
  function loadGoogleFont(name:string, variation:[min:number,max:number]])
 ```
 
 Load a Google Font and its variations ranging within their respective min-max
+
 ```js
  function loadGoogleFont(name:string, variation:{key: value:number, ...})
 ```
-
 
 # Under the hood
 
