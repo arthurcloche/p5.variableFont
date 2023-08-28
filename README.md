@@ -1,6 +1,5 @@
 # p5.variableFont
-
-<video autoplay loop mute src="src/example.mp4"></video>
+![example](https://github.com/amehowc/p5.variableFont/assets/38710749/d08ec9c9-6c55-4d29-8274-ba6ddd88d66e)
 
 ## Bringing variable fonts to p5.js 🎉
 
