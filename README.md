@@ -105,6 +105,23 @@ Same idea as above but for the text variations (make sure that the weights exist
 
 ---
 
+### measureText()
+
+Get the bounding box for the a given string. Need to be called after either `textWeight()`, `textVariations()` or `textFont()` with variable parameters to be taken into account by the drawing context. 
+
+! Important : Since we are tapping directly in the font measurement, you will have to vertically adjust the bounding box to match the text precisely on the screen. This operation is usually done by the browser but we have to do it manually here. The measurement provide a `offset` value that can be used for that purpose.
+
+```js
+ function measureText(text : string)
+ return {
+    width : number,
+    height : number,
+    offset : number
+ }
+```
+
+---
+
 ### textStretch()
 
 ```js
